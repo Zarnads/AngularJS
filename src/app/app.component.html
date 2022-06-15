@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>todo app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <h3 style="color:white ;   text-decoration: underline; text-decoration-color: rgb(243, 243, 244);">To-Do List
+        </h3>
+        <form class="todo-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <input type="text" placeholder="add your task here" id="title" name="title" ngModel>
+            <div>
+                <button type="submit" class="btn-floating waves-effect waves-light green ">
+                    <i class=" material-icons"> add </i>
+                </button>
+            </div>
+        </form>
+        <ul class="todo-list">
+            <li *ngFor="let todo of todos">
+                <div *ngIf="!this.todo.isComplete">
+                    <div style="font-size: 20px;">{{this.todo.title}}</div>
+                    <div>
+                        <button (click)="onComplete(this.todo.id)"
+                            class=" btn-floating waves-effect waves-light blue "><i
+                                class="material-icons">check</i></button>
+                        <button (click)="onDelete(this.todo.id)" class=" btn-floating waves-effect waves-light red "><i
+                                class="material-icons">delete</i></button>
+                    </div>
+                </div>
+            </li>
+            <br>
+            <h4 style="color:white ;  text-decoration: underline;">List of Completed Task</h4>
+            <br>
+            <li *ngFor="let todo of todos">
+                <div *ngIf="this.todo.isComplete">
+                    <div style="font-size: 20px;">{{this.todo.title}}</div>
+                    <div>
+                        <button (click)="onDelete(this.todo.id)" class=" btn-floating waves-effect waves-light red "><i
+                                class="material-icons">delete</i></button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
