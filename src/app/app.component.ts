@@ -21,11 +21,18 @@ export class AppComponent {
     }
   }
 
+
   onSubmit(form: NgForm) {
     let todo = new Todo(Guid.create(), form.value.title, false);
-    this.todos.push(todo);
-    form.resetForm();
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    if(form.value.title!=null){
+      this.todos.push(todo);
+      form.resetForm();
+      localStorage.setItem("todos", JSON.stringify(this.todos));
+    }
+   else{
+    console.log("required")
+   }
+   
   }
   onComplete(id: Guid) {
     let todo = this.todos.filter(x => x.id === id)[0];
